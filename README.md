@@ -147,6 +147,16 @@ This project demonstrates practical skills in:
 
 ## Featured Security Workflows
 
+### Authentication Detection
+
+A Bash-based monitoring script analyzes Linux authentication telemetry and generates an alert when suspicious SSH activity is detected.
+
+![Authentication Detection](screenshots/01-authentication-detection.png)
+
+The detection identified invalid username activity in the SSH logs and surfaced the associated events for analyst review.
+
+---
+
 ### SSH Hardening
 
 I configured SSH key authentication and disabled password-based SSH login after verifying key login worked safely.
@@ -222,7 +232,9 @@ The script generated:
 ```text
 [ALERT] File integrity change detected.
 ```
+![File Integrity Monitoring Detection](screenshots/03-file-integrity-detection.png)
 
+The integrity check detected that `app.conf` no longer matched its SHA-256 baseline while `users.conf` remained unchanged, generating a file integrity alert for analyst review.
 ---
 
 ### Linux Auditing
@@ -267,6 +279,10 @@ The firewall logs showed fields such as:
 - Time To Live
 - Packet length
 
+![UFW Firewall Logging](screenshots/02-firewall-logging.png)
+
+The captured UFW logs show blocked ICMP traffic from the Ubuntu server (`10.0.2.15`) to `1.1.1.1`, including source, destination, protocol, ICMP type, packet length, and other network metadata.
+
 ---
 
 ### Incident Report
@@ -278,6 +294,9 @@ admin
 test
 backup
 ```
+![SSH Attack Investigation](screenshots/04-ssh-attack-investigation.png)
+
+The investigation identified repeated invalid-user authentication attempts originating from `10.0.2.2`, targeting multiple usernames and generating associated pre-authentication connection-reset events.
 
 I collected evidence, counted events, identified indicators of compromise, and wrote a SOC-style incident report.
 
@@ -293,6 +312,9 @@ Example indicators:
 | Activity | Invalid user login attempts |
 | Related Event | Connection reset during pre-authentication |
 
+![SOC Incident Report](screenshots/05-incident-report.png)
+
+The final incident documentation consolidated the investigation findings into analyst-ready indicators, including the source IP, targeted service, attempted usernames, event type, and related pre-authentication activity.
 ---
 
 ## Key Security Lessons
