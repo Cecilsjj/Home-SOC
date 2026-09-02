@@ -1,25 +1,43 @@
 # Home SOC Cybersecurity Lab
 
-## Overview
+A Linux-based Security Operations Center (SOC) environment focused on security monitoring, detection engineering, system hardening, and incident investigation.
 
-This project is a hands-on Home SOC cybersecurity lab built to develop practical skills in Linux administration, system hardening, log analysis, detection scripting, evidence collection, and incident reporting.
+The environment was used to harden SSH access, monitor authentication activity, analyze Linux security logs, detect file integrity changes, automate security monitoring with Bash and cron, inspect audit events, generate controlled attack activity, collect forensic evidence, and produce a SOC-style incident report.
 
-SOC stands for **Security Operations Center**.
+## Key Security Outcomes
 
-The purpose of this lab is to demonstrate job-ready cybersecurity skills through documented technical labs, security monitoring exercises, and investigation workflows.
+- Built a Bash-based authentication detection script for suspicious SSH and sudo activity
+- Automated security monitoring and reporting with cron
+- Hardened SSH using key-based authentication and disabled password-based login
+- Configured UFW firewall controls and investigated blocked network traffic
+- Implemented File Integrity Monitoring (FIM) using SHA-256 baselines
+- Used `auditd` to monitor security-relevant file activity
+- Generated and investigated controlled authentication attacks
+- Collected security evidence and documented findings in a SOC-style incident report
+- Performed local Wazuh agent inspection and troubleshooting
 
-This lab was built using:
+## Investigation Highlight
 
-- Ubuntu Server
-- VirtualBox
-- SSH
-- UFW firewall
-- Linux logs
-- auditd
-- Bash scripting
-- File Integrity Monitoring
-- Wazuh agent inspection
-- GitHub documentation
+A controlled SSH attack simulation generated invalid-user authentication activity against the Linux server. Authentication logs were investigated to identify the source, targeted service, attempted usernames, and associated pre-authentication events.
+
+The investigation produced indicators including:
+
+| Indicator | Observed Value |
+|---|---|
+| Target Service | SSH |
+| Invalid Usernames | `admin`, `test`, `backup` |
+| Activity | Invalid user authentication attempts |
+| Related Event | Connection reset during pre-authentication |
+
+The resulting evidence was preserved and documented in a SOC-style incident report containing findings, impact assessment, response actions, and recommendations.
+
+## Technology Stack
+
+`Ubuntu Server` · `Linux` · `SSH` · `UFW` · `Bash` · `auditd` · `cron` · `journalctl` · `Wazuh` · `VirtualBox` · `GitHub`
+
+---
+
+## Project Goals
 
 ---
 
