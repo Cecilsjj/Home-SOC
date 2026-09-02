@@ -72,6 +72,57 @@ The goals of this project are to:
 
 ---
 
+## Network & Security Architecture
+
+The Home SOC environment uses a Windows host running an Ubuntu Server virtual machine through VirtualBox. SSH access is forwarded through the VirtualBox NAT network to the Ubuntu SOC server.
+
+```text
+Windows Host
+    |
+    | SSH via 127.0.0.1:2222
+    v
+VirtualBox NAT
+    |
+    v
+Ubuntu Server: soc-server
+IPv4: 10.0.2.15/24
+Interface: enp0s3
+    |
+    +-- OpenSSH (22/tcp)
+    +-- UFW Firewall
+    +-- Linux Authentication/System Logs
+    +-- Bash Detection Scripts
+    +-- cron Scheduled Monitoring
+    +-- auditd
+    +-- File Integrity Monitoring (FIM)
+    +-- Wazuh Agent Inspection
+```
+
+### Security Monitoring Flow
+
+```text
+Authentication / Network / File Activity
+                  |
+                  v
+       Linux Logs / UFW / auditd / FIM
+                  |
+                  v
+          Detection & Analysis
+                  |
+                  v
+           Evidence Collection
+                  |
+                  v
+          Incident Investigation
+                  |
+                  v
+          SOC Incident Report
+```
+
+This architecture provides a controlled environment for generating security events, collecting host and network telemetry, developing detections, investigating suspicious activity, and documenting findings through a SOC-style workflow.
+
+---
+
 ## Skills Demonstrated
 
 This project demonstrates practical skills in:
