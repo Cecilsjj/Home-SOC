@@ -315,6 +315,23 @@ Example indicators:
 ![SOC Incident Report](screenshots/05-incident-report.png)
 
 The final incident documentation consolidated the investigation findings into analyst-ready indicators, including the source IP, targeted service, attempted usernames, event type, and related pre-authentication activity.
+
+#### MITRE ATT&CK Mapping
+
+The simulated SSH activity was mapped to MITRE ATT&CK based on the behavior directly supported by the collected telemetry.
+
+| Observed Behavior | Tactic | Technique | Technique ID | Confidence |
+|---|---|---|---|---|
+| SSH remote access activity | Lateral Movement | SSH | `T1021.004` | HIGH |
+| Repeated invalid-user authentication attempts | Credential Access | Password Guessing | `T1110.001` | LOW / POSSIBLE |
+
+**Mapping rationale:**
+
+- **T1021.004 — SSH:** The collected telemetry directly shows repeated SSH connection attempts against the Ubuntu server, making the SSH technique mapping strongly supported.
+- **T1110.001 — Password Guessing:** The repeated invalid-user attempts are consistent with password-guessing behavior; however, password authentication was disabled on the server. The available telemetry confirms username enumeration/authentication attempts but does not directly demonstrate passwords being guessed. This mapping is therefore treated as possible rather than confirmed.
+
+This confidence-based approach avoids overstating what the available telemetry proves and distinguishes directly observed behavior from analyst interpretation.
+
 ---
 
 ## Key Security Lessons
